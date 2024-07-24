@@ -1,9 +1,4 @@
-interface pokeType {
-  [key: string]: {
-    name: string;
-    color: string;
-  };
-}
+import { pokeType } from '../type';
 
 export const ConvertedText: pokeType = {
   normal: { name: '노말', color: '#9FA19F' },

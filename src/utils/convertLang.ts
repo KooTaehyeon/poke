@@ -8,7 +8,6 @@ interface LanguageData {
 export const convertLanguage = (context: LanguageData[] | undefined) => {
   const lang = {
     lang: 'ko',
-    langNum_genera: 7,
   };
 
   // context가 undefined가 아닌지 확인합니다.

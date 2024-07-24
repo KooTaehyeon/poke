@@ -1,15 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
-
-interface InputProps {
-  search: {
-    value: string;
-    onChange: (
-      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => void;
-  };
-  refetch: () => void;
-}
+import { InputProps } from '../../type';
 
 const Search = ({ search, refetch }: InputProps) => {
   return (

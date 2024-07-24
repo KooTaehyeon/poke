@@ -1,15 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
-import {
-  getPokemonListWithSpecies,
-  getPoketmonInfo,
-  getPoketmonInfoUrls,
-} from '../../api/pokeApi';
+import { getPokemonListWithSpecies, getPoketmonInfo } from '../../api/pokeApi';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { convertLanguage } from '../../utils/convertLang';
 import { entriesConvertLang } from '../../utils/entriesConvertLang';
 import { ConvertedText } from '../../utils/convertType';
+import { LanguageData } from '../../type';
+
 const Detail = () => {
   const { id } = useParams();
 
@@ -23,27 +21,17 @@ const Detail = () => {
     queryKey: ['pokemonSpecies', info && info.species.name],
     queryFn: () => getPokemonListWithSpecies(info && info.species.name),
   });
-  // 진화형태 데이터 가져오기
 
-  const urls = speciesInfo && speciesInfo?.evolution_chain.url;
-  const { data: urlInfo }: any = useQuery({
-    queryKey: ['pokeEvo'],
-    queryFn: () => getPoketmonInfoUrls(urls),
-    // retry: 1,
-  });
   //이름
   const nameText: string[] = convertLanguage(speciesInfo && speciesInfo?.names);
   // 포켓몬 항목
-  const entriesText: any = entriesConvertLang(
+  const entriesText: LanguageData[] = entriesConvertLang(
     speciesInfo && speciesInfo?.flavor_text_entries
   );
   //
-  const generaText: any = entriesConvertLang(
+  const generaText: LanguageData[] = entriesConvertLang(
     speciesInfo && speciesInfo?.genera
   );
-
-  console.log(info, 'info');
-  console.log(speciesInfo, 'speciesInfo');
 
   return (
     <Dev>
@@ -61,7 +49,7 @@ const Detail = () => {
           }}
         />
         <Neme>{speciesInfo && nameText[0]}</Neme>
-        <AnimalName>{speciesInfo && generaText[0].genus}</AnimalName>
+        <AnimalName>{speciesInfo && generaText[0]?.genus}</AnimalName>
         <TagBox>
           {info &&
             info.types.map((item: { type: { name: string | number } }) => {

@@ -1,13 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import {
-  getPoketmonInfo,
-  getPokemonListWithSpecies,
-  // getPokemonAbiluty,
-} from '../api/pokeApi';
+import { getPoketmonInfo, getPokemonListWithSpecies } from '../api/pokeApi';
 import styled from 'styled-components';
 import { convertLanguage } from '../utils/convertLang';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useNavigate } from 'react-router-dom';
+
 const PokeCard = ({ name }: { name: string }) => {
   // console.log(name, 'name', url);
   const navigate = useNavigate();
@@ -22,22 +19,12 @@ const PokeCard = ({ name }: { name: string }) => {
     queryFn: () => getPokemonListWithSpecies(data && data.species.name),
   });
 
-  // console.log(pokemonSpecies);
-  // const { data: abiluty }: any = useQuery({
-  //   queryKey: ['getPokemonAbiluty', data && data.id],
-  //   queryFn: () => getPokemonAbiluty('hustle'),
-  // });
-  // console.log(abiluty, 'abiluty');
-
   const nameText: string[] = convertLanguage(pokemonSpecies?.names);
 
-  // let generaText: any = convertLanguage(pokemonSpecies?.genera);
   const imageErrorHandler = (
     e: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
     const target = e.currentTarget as HTMLImageElement;
-    console.log(target, target.src, 'src');
-
     target.src = '/images/packmonBall.jpeg';
   };
   if (data === '') return <></>;

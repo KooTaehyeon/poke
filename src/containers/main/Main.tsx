@@ -24,12 +24,6 @@ const Main = () => {
       return await getPoketmonListAll({ pageParam, search: search.value });
     },
     getNextPageParam: (lastPage, pages) => {
-      // const nextPage = pages.length * 12;
-      // const { next }: any = lastPage;
-      // console.log(lastPage, 'next', next);
-      // if (!next) return undefined;
-      // return Number(new URL(next).searchParams.get('offset'));
-      // return lastPage && lastPage.length > 0 ? nextPage : undefined;
       if (!lastPage || lastPage.length === 0) return undefined;
       return pages.length * 12;
     },
@@ -60,7 +54,6 @@ const Main = () => {
         {/* 검색시  */}
         {search.value !== ''
           ? data?.pages.map((pokemon, idx) => {
-              console.log(pokemon);
               const name = pokemon[0].name;
               return (
                 <React.Fragment key={`${idx}`}>

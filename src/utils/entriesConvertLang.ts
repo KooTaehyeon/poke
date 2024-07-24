@@ -1,14 +1,8 @@
-interface LanguageData {
-  language: {
-    name: string;
-  };
-  name: string; // 다른 필요한 속성들 추가 가능
-}
+import { LanguageData } from '../type';
 
 export const entriesConvertLang = (context: LanguageData[] | undefined) => {
   const lang = {
     lang: 'ko',
-    langNum_genera: 7,
   };
 
   // context가 undefined가 아닌지 확인합니다.
